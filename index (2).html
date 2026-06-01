@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Saifeldeen Eltengy - Frontend Developer & Founder of Eltengy Studios | سيف الدين التنجي - مطور واجهات أمامية">
+<meta name="keywords" content="web developer, frontend, Eltengy Studios, portfolio, سيف الدين التنجي, مطور ويب">
+<meta name="author" content="Saifeldeen Eltengy">
+<meta property="og:title" content="Saifeldeen Eltengy | Eltengy Studios">
+<meta property="og:description" content="Frontend Developer & Web Designer">
+<meta property="og:type" content="website">
+<title>Saifeldeen Eltengy | Eltengy Studios</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text y='.9em' font-size='60' x='50%' text-anchor='middle' fill='%23c9a84c'>E</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Cairo:wght@300;400;500;600;700;900&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN SYSTEM — DARK NAVY × GOLD × ELECTRIC BLUE 2026
+   ============================================================ */
+:root{
+  --navy:#040b1a;
+  --navy-2:#071122;
+  --navy-3:#0d1a30;
+  --navy-4:#111f38;
+  --navy-5:#172847;
+  --gold:#c9a84c;
+  --gold-l:#e5c97a;
+  --gold-d:#8a6e28;
+  --gold-glow:rgba(201,168,76,.35);
+  --blue:#2563ff;
+  --blue-l:#5b8fff;
+  --blue-d:#1240cc;
+  --blue-glow:rgba(37,99,255,.3);
+  --white:#f0f4ff;
+  --white-dim:rgba(240,244,255,.65);
+  --white-ghost:rgba(240,244,255,.06);
+  --glass:rgba(255,255,255,.04);
+  --glass-b:rgba(201,168,76,.18);
+  --glass-bb:rgba(37,99,255,.18);
+  --radius:18px;
+  --t:.42s cubic-bezier(.23,1,.32,1);
+  --font-en:'Bricolage Grotesque',sans-serif;
+  --font-ar:'Cairo',sans-serif;
+  --font-display:'Syne',sans-serif;
+  --max:1200px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--navy);
+  color:var(--white);
+  font-family:var(--font-ar);
+  line-height:1.7;
+  overflow-x:hidden;
+  cursor:none;
+}
+body.en{font-family:var(--font-en);direction:ltr}
+body.ar{font-family:var(--font-ar);direction:rtl}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{cursor:none;font-family:inherit;border:none;outline:none}
+textarea,input{font-family:inherit;outline:none}
+
+/* ===== CUSTOM CURSOR ===== */
+#cx,#cr{position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+#cx{width:8px;height:8px;background:var(--gold);border-radius:50%;transition:width .2s,height .2s}
+#cr{width:38px;height:38px;border:1.5px solid rgba(201,168,76,.5);border-radius:50%;transition:width .35s,height .35s,border-color .35s,opacity .35s}
+body.ch #cr{width:64px;height:64px;border-color:var(--blue-l);opacity:.55}
+body.ch #cx{width:5px;height:5px}
+
+/* ===== PARTICLE CANVAS ===== */
+#pc{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ===== LOADER ===== */
+#loader{
+  position:fixed;inset:0;
+  background:var(--navy);
+  z-index:99990;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  transition:opacity .9s ease,visibility .9s ease;
+}
+#loader.out{opacity:0;visibility:hidden}
+.ld-logo{
+  font-family:var(--font-display);
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:800;
+  letter-spacing:.04em;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold-l),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  opacity:0;animation:fu .8s .3s ease forwards;
+}
+.ld-track{width:180px;height:2px;background:var(--white-ghost);border-radius:99px;overflow:hidden}
+.ld-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--blue-l));border-radius:99px;animation:lb 2.2s ease forwards}
+.ld-sub{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--blue-l);opacity:0;animation:fu .7s .6s ease forwards}
+@keyframes lb{to{width:100%}}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== NAV ===== */
+#nav{
+  position:fixed;top:0;inset-inline:0;
+  z-index:1000;
+  padding:22px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:padding var(--t),background var(--t);
+}
+#nav.sc{
+  padding:14px 48px;
+  background:rgba(4,11,26,.88);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(201,168,76,.12);
+}
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:1.35rem;font-weight:800;
+  background:linear-gradient(120deg,var(--gold),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.02em;cursor:pointer;
+}
+.nav-links{display:flex;gap:34px;list-style:none}
+.nav-links a{
+  font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--white-dim);cursor:pointer;position:relative;transition:color var(--t);
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;inset-inline:0;height:1.5px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;
+  transition:transform var(--t);
+}
+.en .nav-links a::after{transform-origin:left}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+.nav-right{display:flex;align-items:center;gap:14px}
+.ls{
+  display:flex;align-items:center;
+  background:var(--white-ghost);border:1px solid var(--glass-b);border-radius:99px;padding:3px;
+}
+.ls-b{
+  padding:6px 14px;border-radius:99px;font-size:.72rem;font-weight:700;
+  color:var(--white-dim);background:transparent;transition:all var(--t);cursor:none;border:none;
+}
+.ls-b.on{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:var(--navy);box-shadow:0 0 14px var(--gold-glow)}
+.nav-hire{
+  padding:10px 22px;border-radius:99px;font-size:.78rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;
+  background:transparent;border:1.5px solid var(--blue);color:var(--blue-l);
+  cursor:none;transition:all var(--t);
+}
+.nav-hire:hover{background:var(--blue);color:#fff;box-shadow:0 0 24px var(--blue-glow)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all var(--t)}
+.ham.on span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.ham.on span:nth-child(2){opacity:0}
+.ham.on span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* MOBILE MENU */
+.mob{
+  position:fixed;inset:0;background:rgba(4,11,26,.97);backdrop-filter:blur(20px);
+  z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;
+  opacity:0;visibility:hidden;transition:all var(--t);
+}
+.mob.on{opacity:1;visibility:visible}
+.mob a{
+  font-family:var(--font-display);font-size:clamp(1.8rem,7vw,2.5rem);
+  color:var(--white);cursor:pointer;transition:color var(--t);
+}
+.mob a:hover{color:var(--gold)}
+
+/* ===== LAYOUT ===== */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px;position:relative;z-index:2}
+section{position:relative;z-index:2}
+.pad{padding:110px 0}
+
+.lbl{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.68rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--blue-l);
+  margin-bottom:18px;
+}
+.lbl::before,.lbl::after{content:'';display:block;width:28px;height:1px;background:var(--blue-l);opacity:.5}
+
+.ttl{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.1;margin-bottom:14px;
+}
+.ttl .gg{
+  background:linear-gradient(120deg,var(--gold),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sub{font-size:.97rem;color:var(--white-dim);line-height:1.85;max-width:520px}
+
+/* ===== DIVIDER ===== */
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),var(--blue-d),transparent);opacity:.25}
+
+/* ===== BUTTONS ===== */
+.btn-g{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 30px;border-radius:99px;font-size:.82rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;cursor:none;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold));color:var(--navy);
+  border:none;position:relative;overflow:hidden;transition:all var(--t);
+}
+.btn-g::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));opacity:0;transition:opacity var(--t)}
+.btn-g:hover{box-shadow:0 8px 36px var(--gold-glow);transform:translateY(-2px)}
+.btn-g:hover::before{opacity:1}
+.btn-g span{position:relative;z-index:1}
+
+.btn-b{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 30px;border-radius:99px;font-size:.82rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;cursor:none;
+  background:var(--blue);color:#fff;border:none;transition:all var(--t);
+}
+.btn-b:hover{background:var(--blue-d);box-shadow:0 8px 36px var(--blue-glow);transform:translateY(-2px)}
+
+.btn-o{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 30px;border-radius:99px;font-size:.82rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;cursor:none;
+  background:transparent;color:var(--white);border:1.5px solid rgba(240,244,255,.2);
+  transition:all var(--t);
+}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);transform:translateY(-2px)}
+
+/* ===== REVEAL ===== */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 0 80px;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 65% at 85% 45%,rgba(37,99,255,.09) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 50% at 15% 60%,rgba(201,168,76,.07) 0%,transparent 70%);
+}
+.hero-mesh{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(37,99,255,.1);border:1px solid rgba(37,99,255,.25);
+  border-radius:99px;padding:8px 18px;font-size:.72rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--blue-l);
+  margin-bottom:24px;opacity:0;animation:fu .7s .3s ease forwards;
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-l);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.hero-h{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,5.5vw,4.4rem);font-weight:800;line-height:1.08;
+  margin-bottom:18px;opacity:0;animation:fu .9s .45s ease forwards;
+}
+.hero-h .stroke{
+  -webkit-text-stroke:1.5px var(--gold);color:transparent;
+  background:none;-webkit-text-fill-color:transparent;
+}
+.hero-h .fill{
+  background:linear-gradient(120deg,var(--white),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-type{
+  display:flex;align-items:center;gap:10px;font-size:1.1rem;color:var(--white-dim);
+  margin-bottom:22px;min-height:1.8em;opacity:0;animation:fu .8s .55s ease forwards;
+}
+.hero-type .pre{color:var(--gold);font-weight:700}
+#typed{color:var(--white);font-weight:600}
+.blink{display:inline-block;width:2px;height:1em;background:var(--blue-l);vertical-align:middle;margin-inline-start:2px;animation:bk .9s step-end infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:0}}
+.hero-p{font-size:.95rem;color:var(--white-dim);line-height:1.9;margin-bottom:36px;max-width:460px;opacity:0;animation:fu .8s .65s ease forwards}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;opacity:0;animation:fu .8s .75s ease forwards}
+
+/* HERO VISUAL */
+.hero-vis{position:relative;display:flex;justify-content:center;align-items:center;opacity:0;animation:fu .9s .5s ease forwards}
+.hv-ring{
+  width:340px;height:340px;border-radius:50%;
+  border:1px solid transparent;
+  background:linear-gradient(var(--navy-2),var(--navy-2)) padding-box,
+             linear-gradient(135deg,var(--gold-d),transparent 50%,var(--blue-d)) border-box;
+  animation:spin 10s linear infinite;position:relative;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hv-ring2{
+  position:absolute;inset:-20px;border-radius:50%;
+  border:1px solid rgba(37,99,255,.12);
+  animation:spin 20s linear infinite reverse;
+}
+.hv-inner{
+  position:absolute;inset:16px;border-radius:50%;
+  background:linear-gradient(145deg,var(--navy-3),var(--navy-4));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  border:1px solid rgba(201,168,76,.12);
+  overflow:hidden;
+}
+.hv-inner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 35% 30%,rgba(201,168,76,.08) 0%,transparent 60%),
+             radial-gradient(circle at 65% 70%,rgba(37,99,255,.08) 0%,transparent 60%);
+}
+.hv-avatar-icon{font-size:4.5rem;opacity:.25;position:relative;z-index:1}
+.hv-name{font-family:var(--font-display);font-size:.8rem;font-weight:700;letter-spacing:.14em;color:var(--gold);opacity:.6;position:relative;z-index:1;text-transform:uppercase}
+
+/* floating stat cards */
+.hv-cards{position:absolute;inset:0;pointer-events:none}
+.fc{
+  position:absolute;
+  background:rgba(7,17,34,.85);border:1px solid var(--glass-b);border-radius:14px;
+  padding:12px 16px;backdrop-filter:blur(16px);
+  display:flex;align-items:center;gap:10px;white-space:nowrap;
+  animation:flt 4s ease-in-out infinite;
+}
+.fc:nth-child(1){top:8%;inset-inline-end:-5%;animation-delay:0s}
+.fc:nth-child(2){bottom:18%;inset-inline-start:-8%;animation-delay:1.6s}
+.fc:nth-child(3){top:52%;inset-inline-end:-12%;animation-delay:.8s}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.fc-icon{width:32px;height:32px;border-radius:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center}
+.fc-icon svg{width:16px;height:16px;fill:var(--gold)}
+.fc-v{font-size:.95rem;font-weight:800;color:var(--gold);font-family:var(--font-display)}
+.fc-l{font-size:.62rem;color:var(--white-dim);letter-spacing:.05em}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about{background:var(--navy-2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-img{
+  position:relative;
+  aspect-ratio:3/4;max-height:500px;
+  border-radius:24px;overflow:hidden;
+  border:1px solid var(--glass-b);
+}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-img-over{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 55%,rgba(4,11,26,.92) 100%);
+}
+.about-badge{
+  position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--gold-d),var(--gold));
+  color:var(--navy);padding:11px 28px;border-radius:99px;
+  font-size:.78rem;font-weight:800;letter-spacing:.07em;
+  white-space:nowrap;box-shadow:0 8px 32px var(--gold-glow);
+}
+
+.about-txt .sub{max-width:100%;margin-bottom:28px}
+.about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.ah{
+  background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;
+  padding:18px;backdrop-filter:blur(10px);transition:all var(--t);
+}
+.ah:hover{border-color:rgba(201,168,76,.4);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.ah-v{
+  font-family:var(--font-display);font-size:1.9rem;font-weight:800;
+  background:linear-gradient(120deg,var(--gold),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:6px;
+}
+.ah-l{font-size:.72rem;color:var(--white-dim);letter-spacing:.05em}
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+#skills{background:var(--navy)}
+.skills-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.sk{
+  background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--radius);
+  padding:26px 22px;backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;transition:all var(--t);cursor:default;
+}
+.sk::before{
+  content:'';position:absolute;top:0;inset-inline:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--blue-l));
+  transform:scaleX(0);transform-origin:right;transition:transform var(--t);
+}
+.en .sk::before{transform-origin:left}
+.sk:hover{border-color:rgba(37,99,255,.3);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.sk:hover::before{transform:scaleX(1)}
+.sk-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.sk-name{font-size:.95rem;font-weight:700}
+.sk-pct{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:800;
+  background:linear-gradient(120deg,var(--gold),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sk-icon{width:44px;height:44px;border-radius:10px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.sk-icon svg{width:22px;height:22px}
+.sk-bar{height:3px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+.sk-fill{height:100%;border-radius:99px;width:0%;transition:width 1.6s cubic-bezier(.23,1,.32,1);box-shadow:0 0 8px var(--gold-glow)}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+#projects{background:var(--navy-2)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pc{
+  background:var(--navy-3);border:1px solid rgba(240,244,255,.07);
+  border-radius:var(--radius);overflow:hidden;
+  transition:all var(--t);cursor:pointer;
+}
+.pc:hover{border-color:rgba(201,168,76,.3);transform:translateY(-8px);box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 40px rgba(201,168,76,.08)}
+
+.pc-img{position:relative;aspect-ratio:16/10;overflow:hidden}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.pc:hover .pc-img img{transform:scale(1.06)}
+.pc-ov{
+  position:absolute;inset:0;
+  background:rgba(4,11,26,.88);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  opacity:0;transition:opacity var(--t);
+}
+.pc:hover .pc-ov{opacity:1}
+.pc-btn{
+  padding:10px 18px;border-radius:99px;font-size:.73rem;font-weight:700;
+  letter-spacing:.05em;cursor:none;transition:all var(--t);
+}
+.pc-btn.pg{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:var(--navy);border:none}
+.pc-btn.pb{background:transparent;border:1.5px solid var(--blue-l);color:var(--blue-l)}
+.pc-btn:hover{transform:scale(1.05)}
+
+.pc-body{padding:20px}
+.pc-cat{font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.pc-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.pc-desc{font-size:.82rem;color:var(--white-dim);line-height:1.7;margin-bottom:14px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:3px 10px;border:1px solid rgba(240,244,255,.1);border-radius:99px;font-size:.63rem;color:var(--white-dim)}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+#services{background:var(--navy)}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.sv{
+  background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--radius);
+  padding:34px 26px;backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;transition:all var(--t);cursor:default;
+}
+.sv::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(37,99,255,.07),transparent 70%);
+  opacity:0;transition:opacity var(--t);
+}
+.sv:hover{border-color:rgba(37,99,255,.3);transform:translateY(-8px);box-shadow:0 28px 70px rgba(0,0,0,.45)}
+.sv:hover::after{opacity:1}
+.sv-icon{
+  width:54px;height:54px;border-radius:14px;
+  background:rgba(37,99,255,.1);border:1px solid rgba(37,99,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;transition:all var(--t);
+}
+.sv-icon svg{width:24px;height:24px;stroke:var(--blue-l);fill:none;stroke-width:1.7}
+.sv:hover .sv-icon{background:rgba(37,99,255,.2);box-shadow:0 0 24px rgba(37,99,255,.25)}
+.sv-t{font-size:1rem;font-weight:700;margin-bottom:10px}
+.sv-d{font-size:.85rem;color:var(--white-dim);line-height:1.8}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+#stats{
+  padding:80px 0;
+  background:linear-gradient(180deg,var(--navy-2),var(--navy-3));
+  border-top:1px solid var(--glass-b);border-bottom:1px solid var(--glass-b);
+}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+.st{padding:28px}
+.st-v{
+  font-family:var(--font-display);font-size:3.2rem;font-weight:800;line-height:1;
+  background:linear-gradient(120deg,var(--gold),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;
+}
+.st-l{font-size:.78rem;color:var(--white-dim);letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+#testimonials{background:var(--navy-2)}
+.tsl-wrap{position:relative;overflow:hidden}
+.tsl-track{display:flex;transition:transform .65s cubic-bezier(.23,1,.32,1)}
+.tsl-slide{min-width:100%;padding:0 40px}
+.tc{
+  background:var(--glass);border:1px solid var(--glass-b);border-radius:24px;
+  padding:44px;backdrop-filter:blur(16px);max-width:720px;margin:0 auto;
+  text-align:center;position:relative;
+}
+.tc::before{
+  content:'\201C';font-family:var(--font-display);font-size:7rem;line-height:1;
+  color:var(--gold);opacity:.1;
+  position:absolute;top:10px;inset-inline-start:28px;
+}
+.tc-stars{color:var(--gold);font-size:1rem;letter-spacing:4px;margin-bottom:18px}
+.tc-q{font-size:1rem;line-height:1.9;color:var(--white-dim);font-style:italic;margin-bottom:26px}
+.tc-name{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.tc-role{font-size:.74rem;color:var(--blue-l);letter-spacing:.09em;font-weight:600}
+.tsl-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
+.tsl-dot{width:8px;height:8px;border-radius:99px;background:var(--glass-b);border:none;cursor:none;transition:all var(--t)}
+.tsl-dot.on{width:24px;background:var(--gold);box-shadow:0 0 10px var(--gold-glow)}
+.tsl-arr{display:flex;justify-content:center;gap:10px;margin-top:16px}
+.tsl-a{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--glass-b);background:var(--glass);
+  color:var(--gold);font-size:1rem;cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--t);backdrop-filter:blur(10px);
+}
+.tsl-a:hover{border-color:var(--gold);box-shadow:0 0 14px var(--gold-glow)}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact{background:var(--navy)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.ct-methods{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+.cm{
+  display:flex;align-items:center;gap:16px;
+  background:var(--glass);border:1px solid var(--glass-b);border-radius:14px;
+  padding:16px 20px;text-decoration:none;color:var(--white);
+  transition:all var(--t);backdrop-filter:blur(10px);
+}
+.cm:hover{border-color:rgba(201,168,76,.4);background:rgba(255,255,255,.06);transform:translateX(-4px);box-shadow:0 8px 30px rgba(201,168,76,.1)}
+.en .cm:hover{transform:translateX(4px)}
+.cm-ico{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cm-ico svg{width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:1.8}
+.cm-lbl{font-size:.66rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.cm-val{font-size:.88rem;font-weight:500}
+
+.cf{
+  background:var(--glass);border:1px solid var(--glass-b);
+  border-radius:24px;padding:38px;backdrop-filter:blur(16px);
+}
+.fg{margin-bottom:18px}
+.fl{display:block;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue-l);margin-bottom:8px}
+.fi{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--glass-b);
+  border-radius:10px;padding:13px 16px;font-size:.88rem;color:var(--white);
+  transition:all var(--t);resize:vertical;
+}
+.fi:focus{border-color:var(--blue-l);background:rgba(255,255,255,.07);box-shadow:0 0 0 3px rgba(37,99,255,.1)}
+.fi::placeholder{color:rgba(240,244,255,.2)}
+.fsub{
+  width:100%;padding:15px;border-radius:10px;
+  background:linear-gradient(135deg,var(--blue-d),var(--blue));color:#fff;
+  font-size:.88rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  border:none;cursor:none;transition:all var(--t);
+}
+.fsub:hover{box-shadow:0 8px 32px var(--blue-glow);transform:translateY(-2px)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding:60px 0 28px;
+  border-top:1px solid rgba(201,168,76,.12);
+  position:relative;z-index:2;
+  background:var(--navy-2);
+}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:52px;margin-bottom:44px}
+.ft-logo{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:800;
+  background:linear-gradient(120deg,var(--gold),var(--blue-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:14px;
+}
+.ft-desc{color:var(--white-dim);font-size:.85rem;line-height:1.8;max-width:280px}
+.ft-socials{display:flex;gap:10px;margin-top:20px}
+.fs{
+  width:40px;height:40px;border-radius:10px;
+  border:1px solid var(--glass-b);background:var(--glass);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white-dim);transition:all var(--t);
+}
+.fs svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+.fs:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 14px var(--gold-glow)}
+.ft-col h5{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-links a{font-size:.84rem;color:var(--white-dim);cursor:pointer;transition:color var(--t)}
+.ft-links a:hover{color:var(--gold)}
+.ft-bot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.05);
+  font-size:.77rem;color:rgba(240,244,255,.28);
+}
+.ft-bot span{color:var(--gold)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:48px}
+  .hv-ring{width:270px;height:270px}
+  .about-grid{grid-template-columns:1fr;gap:44px}
+  .skills-wrap{grid-template-columns:repeat(2,1fr)}
+  .srv-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+  .ct-grid{grid-template-columns:1fr;gap:36px}
+  .ft-top{grid-template-columns:1fr;gap:30px}
+}
+@media(max-width:768px){
+  #nav{padding:16px 20px}
+  #nav.sc{padding:12px 20px}
+  .nav-links,.nav-hire{display:none}
+  .ham{display:flex}
+  .skills-wrap{grid-template-columns:1fr 1fr}
+  .srv-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .fc{display:none}
+  .tsl-slide{padding:0}
+  .tc{padding:28px 20px}
+  .about-highlights{grid-template-columns:1fr 1fr}
+  .ft-bot{flex-direction:column;gap:10px;text-align:center}
+}
+@media(max-width:480px){
+  .skills-wrap{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .about-highlights{grid-template-columns:1fr}
+  .hv-ring{width:220px;height:220px}
+}
+</style>
+</head>
+<body class="ar">
+
+<!-- CURSOR -->
+<div id="cx"></div>
+<div id="cr"></div>
+<!-- CANVAS -->
+<canvas id="pc"></canvas>
+
+<!-- ============================================================
+     LOADER
+     ============================================================ -->
+<div id="loader">
+  <div class="ld-logo">Eltengy Studios</div>
+  <div class="ld-track"><div class="ld-bar"></div></div>
+  <div class="ld-sub" data-ar="مطور واجهات أمامية" data-en="Frontend Developer">مطور واجهات أمامية</div>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav id="nav">
+  <div class="nav-logo" onclick="goto('#hero')">Eltengy Studios</div>
+  <ul class="nav-links">
+    <li><a onclick="goto('#about')" data-ar="عني" data-en="About">عني</a></li>
+    <li><a onclick="goto('#skills')" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+    <li><a onclick="goto('#projects')" data-ar="المشاريع" data-en="Projects">المشاريع</a></li>
+    <li><a onclick="goto('#services')" data-ar="الخدمات" data-en="Services">الخدمات</a></li>
+    <li><a onclick="goto('#contact')" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="ls">
+      <button class="ls-b on" id="bAR" onclick="setLang('ar')">AR</button>
+      <button class="ls-b" id="bEN" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="nav-hire" onclick="goto('#contact')" data-ar="وظّفني" data-en="Hire Me">وظّفني</button>
+    <button class="ham" id="ham" onclick="togMob()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <a onclick="goto('#about');closeMob()" data-ar="عني" data-en="About">عني</a>
+  <a onclick="goto('#skills');closeMob()" data-ar="المهارات" data-en="Skills">المهارات</a>
+  <a onclick="goto('#projects');closeMob()" data-ar="المشاريع" data-en="Projects">المشاريع</a>
+  <a onclick="goto('#services');closeMob()" data-ar="الخدمات" data-en="Services">الخدمات</a>
+  <a onclick="goto('#contact');closeMob()" data-ar="تواصل" data-en="Contact">تواصل</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-mesh"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <div class="dot"></div>
+          <span data-ar="مؤسس Eltengy Studios" data-en="Founder of Eltengy Studios">مؤسس Eltengy Studios</span>
+        </div>
+        <h1 class="hero-h">
+          <span class="fill" data-ar="أبني مواقع" data-en="I Build">أبني مواقع</span><br>
+          <span class="stroke" data-ar="احترافية" data-en="Professional">احترافية</span><br>
+          <span class="fill" data-ar="تُلهم الناس" data-en="Websites">تُلهم الناس</span>
+        </h1>
+        <div class="hero-type">
+          <span class="pre" data-ar="أنا" data-en="I am">أنا</span>
+          <span id="typed"></span><span class="blink"></span>
+        </div>
+        <p class="hero-p" data-ar="سيف الدين التنجي — مطور واجهات أمامية شاب ومؤسس Eltengy Studios. بدأت رحلتي في عالم تطوير الويب هذا العام بشغف كبير وطموح لا حدود له لصنع تجارب رقمية استثنائية." data-en="Saifeldeen Eltengy — Young Frontend Developer & Founder of Eltengy Studios. I started my web development journey this year with a deep passion and limitless ambition to craft exceptional digital experiences.">سيف الدين التنجي — مطور واجهات أمامية شاب ومؤسس Eltengy Studios. بدأت رحلتي في عالم تطوير الويب هذا العام بشغف كبير وطموح لا حدود له لصنع تجارب رقمية استثنائية.</p>
+        <div class="hero-btns">
+          <button class="btn-g" onclick="goto('#projects')"><span data-ar="مشاريعي" data-en="View Projects">مشاريعي</span></button>
+          <button class="btn-b" onclick="goto('#contact')"><span data-ar="تواصل معي" data-en="Contact Me">تواصل معي</span></button>
+          <button class="btn-o"><span data-ar="تحميل السيرة الذاتية" data-en="Download CV">تحميل السيرة الذاتية</span></button>
+        </div>
+      </div>
+
+      <div class="hero-vis">
+        <div class="hv-ring">
+          <div class="hv-ring2"></div>
+          <div class="hv-inner">
+            <div class="hv-avatar-icon">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+                <circle cx="40" cy="28" r="16" stroke="rgba(201,168,76,0.4)" stroke-width="2"/>
+                <path d="M10 72c0-16.569 13.431-30 30-30s30 13.431 30 30" stroke="rgba(201,168,76,0.4)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="hv-name">Eltengy Studios</div>
+          </div>
+        </div>
+        <div class="hv-cards">
+          <div class="fc">
+            <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <div><div class="fc-v">5+</div><div class="fc-l" data-ar="مشاريع" data-en="Projects">مشاريع</div></div>
+          </div>
+          <div class="fc">
+            <div class="fc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div><div class="fc-v">2026</div><div class="fc-l" data-ar="مؤسسة" data-en="Founded">مؤسسة</div></div>
+          </div>
+          <div class="fc">
+            <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <div><div class="fc-v">100%</div><div class="fc-l" data-ar="جودة" data-en="Quality">جودة</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" class="pad">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img rv">
+        <img src="https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?w=600&q=80&auto=format&fit=crop" alt="Web Developer Workspace" loading="lazy">
+        <div class="about-img-over"></div>
+        <div class="about-badge" data-ar="مؤسس Eltengy Studios" data-en="Founder of Eltengy Studios">مؤسس Eltengy Studios</div>
+      </div>
+      <div>
+        <div class="lbl rv" data-ar="من أنا" data-en="Who I Am">من أنا</div>
+        <h2 class="ttl rv d1" data-ar="سيف الدين <span class='gg'>التنجي</span>" data-en="Saifeldeen <span class='gg'>Eltengy</span>">سيف الدين <span class="gg">التنجي</span></h2>
+        <p class="sub rv d2" data-ar="بدأت رحلتي في تطوير الويب هذا العام بشغف لا يُوصف. أنا مؤسس Eltengy Studios — علامتي التجارية الخاصة التي أبني من خلالها مواقع ويب حديثة واحترافية. أؤمن أن كل موقع هو فرصة لصنع تجربة لا تُنسى." data-en="I started my web development journey this year with an indescribable passion. I am the founder of Eltengy Studios — my personal brand through which I build modern and professional websites. I believe every website is an opportunity to create an unforgettable experience.">بدأت رحلتي في تطوير الويب هذا العام بشغف لا يُوصف. أنا مؤسس Eltengy Studios — علامتي التجارية الخاصة التي أبني من خلالها مواقع ويب حديثة واحترافية. أؤمن أن كل موقع هو فرصة لصنع تجربة لا تُنسى.</p>
+        <div class="about-highlights rv d3">
+          <div class="ah"><div class="ah-v">5+</div><div class="ah-l" data-ar="مشروع مكتمل" data-en="Projects Done">مشروع مكتمل</div></div>
+          <div class="ah"><div class="ah-v">100%</div><div class="ah-l" data-ar="رضا العملاء" data-en="Client Satisfaction">رضا العملاء</div></div>
+          <div class="ah"><div class="ah-v">2026</div><div class="ah-l" data-ar="سنة التأسيس" data-en="Year Founded">سنة التأسيس</div></div>
+          <div class="ah"><div class="ah-v">5</div><div class="ah-l" data-ar="صناعات مختلفة" data-en="Industries Served">صناعات مختلفة</div></div>
+        </div>
+        <div style="margin-top:28px" class="rv d4">
+          <button class="btn-g" onclick="goto('#contact')"><span data-ar="تواصل معي" data-en="Get In Touch">تواصل معي</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ============================================================
+     SKILLS
+     ============================================================ -->
+<section id="skills" class="pad">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:56px" class="rv">
+      <div class="lbl" style="justify-content:center" data-ar="خبرتي" data-en="My Expertise">خبرتي</div>
+      <h2 class="ttl" data-ar="المهارات <span class='gg'>التقنية</span>" data-en="Technical <span class='gg'>Skills</span>">المهارات <span class="gg">التقنية</span></h2>
+      <p class="sub" style="margin:0 auto" data-ar="أتقن التقنيات الأساسية لبناء تجارب ويب استثنائية" data-en="Mastering core technologies to build exceptional web experiences">أتقن التقنيات الأساسية لبناء تجارب ويب استثنائية</p>
+    </div>
+    <div class="skills-wrap">
+      <!-- HTML -->
+      <div class="sk rv d1">
+        <div class="sk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/>
+            <path d="M8 8h8M8.5 12h7l-.5 4-3 1-3-1-.2-2"/>
+          </svg>
+        </div>
+        <div class="sk-top"><span class="sk-name">HTML5</span><span class="sk-pct">90%</span></div>
+        <div class="sk-bar"><div class="sk-fill" data-w="90" style="background:linear-gradient(90deg,var(--gold-d),var(--gold-l))"></div></div>
+      </div>
+      <!-- CSS -->
+      <div class="sk rv d2">
+        <div class="sk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-l)" stroke-width="1.7">
+            <path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/>
+            <path d="M8 8h8M7.5 12h9l-1 5-3.5 1L8.5 17l-.3-2.5"/>
+          </svg>
+        </div>
+        <div class="sk-top"><span class="sk-name">CSS3</span><span class="sk-pct">85%</span></div>
+        <div class="sk-bar"><div class="sk-fill" data-w="85" style="background:linear-gradient(90deg,var(--blue-d),var(--blue-l))"></div></div>
+      </div>
+      <!-- JS -->
+      <div class="sk rv d3">
+        <div class="sk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.7">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M8 17v-6M13 17v-4c0-1.1.9-2 2-2h0a2 2 0 012 2v4"/>
+          </svg>
+        </div>
+        <div class="sk-top"><span class="sk-name">JavaScript</span><span class="sk-pct">75%</span></div>
+        <div class="sk-bar"><div class="sk-fill" data-w="75" style="background:linear-gradient(90deg,var(--gold-d),var(--gold-l))"></div></div>
+      </div>
+      <!-- Responsive -->
+      <div class="sk rv d1">
+        <div class="sk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-l)" stroke-width="1.7">
+            <rect x="5" y="2" width="14" height="20" rx="2"/>
+            <path d="M12 18h.01"/>
+          </svg>
+        </div>
+        <div class="sk-top"><span class="sk-name" data-ar="تصميم متجاوب" data-en="Responsive Design">تصميم متجاوب</span><span class="sk-pct">88%</span></div>
+        <div class="sk-bar"><div class="sk-fill" data-w="88" style="background:linear-gradient(90deg,var(--blue-d),var(--blue-l))"></div></div>
+      </div>
+      <!-- UI/UX -->
+      <div class="sk rv d2">
+        <div class="sk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.7">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+          </svg>
+        </div>
+        <div class="sk-top"><span class="sk-name">UI/UX Design</span><span class="sk-pct">78%</span></div>
+        <div class="sk-bar"><div class="sk-fill" data-w="78" style="background:linear-gradient(90deg,var(--gold-d),var(--blue-l))"></div></div>
+      </div>
+      <!-- GitHub -->
+      <div class="sk rv d3">
+        <div class="sk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-l)" stroke-width="1.7">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+          </svg>
+        </div>
+        <div class="sk-top"><span class="sk-name">GitHub</span><span class="sk-pct">72%</span></div>
+        <div class="sk-bar"><div class="sk-fill" data-w="72" style="background:linear-gradient(90deg,var(--blue-d),var(--blue-l))"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section id="projects" class="pad">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:56px" class="rv">
+      <div class="lbl" style="justify-content:center" data-ar="أعمالي" data-en="My Work">أعمالي</div>
+      <h2 class="ttl" data-ar="<span class='gg'>المشاريع</span> المميزة" data-en="Featured <span class='gg'>Projects</span>"><span class="gg">المشاريع</span> المميزة</h2>
+      <p class="sub" style="margin:0 auto" data-ar="مشاريع حقيقية تعكس مهارتي وشغفي بالتطوير" data-en="Real projects reflecting my skills and passion for development">مشاريع حقيقية تعكس مهارتي وشغفي بالتطوير</p>
+    </div>
+    <div class="proj-grid" id="pg"></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section id="services" class="pad">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:56px" class="rv">
+      <div class="lbl" style="justify-content:center" data-ar="ما أقدمه" data-en="What I Offer">ما أقدمه</div>
+      <h2 class="ttl" data-ar="<span class='gg'>خدماتي</span> الاحترافية" data-en="My Professional <span class='gg'>Services</span>"><span class="gg">خدماتي</span> الاحترافية</h2>
+    </div>
+    <div class="srv-grid">
+      <div class="sv rv d1">
+        <div class="sv-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="sv-t" data-ar="تصميم المواقع" data-en="Website Design">تصميم المواقع</div>
+        <div class="sv-d" data-ar="تصاميم عصرية وجذابة تعكس هوية علامتك التجارية بأعلى مستوى من الاحترافية والتميز." data-en="Modern, attractive designs that reflect your brand identity with the highest level of professionalism and distinction.">تصاميم عصرية وجذابة تعكس هوية علامتك التجارية بأعلى مستوى من الاحترافية والتميز.</div>
+      </div>
+      <div class="sv rv d2">
+        <div class="sv-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+        <div class="sv-t" data-ar="الصفحات التسويقية" data-en="Landing Pages">الصفحات التسويقية</div>
+        <div class="sv-d" data-ar="صفحات هبوط مُحسَّنة لتحويل الزوار إلى عملاء بتصاميم مُقنعة وفعّالة تحقق أهدافك." data-en="Optimized landing pages that convert visitors into clients with compelling and effective designs that achieve your goals.">صفحات هبوط مُحسَّنة لتحويل الزوار إلى عملاء بتصاميم مُقنعة وفعّالة تحقق أهدافك.</div>
+      </div>
+      <div class="sv rv d3">
+        <div class="sv-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M12 17v4M8 21h8"/></svg></div>
+        <div class="sv-t" data-ar="مواقع البورتفوليو" data-en="Portfolio Websites">مواقع البورتفوليو</div>
+        <div class="sv-d" data-ar="عرض أعمالك ومهاراتك بشكل احترافي يستقطب أفضل الفرص والعملاء لمسيرتك المهنية." data-en="Showcase your work and skills professionally to attract the best opportunities and clients for your career.">عرض أعمالك ومهاراتك بشكل احترافي يستقطب أفضل الفرص والعملاء لمسيرتك المهنية.</div>
+      </div>
+      <div class="sv rv d1">
+        <div class="sv-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="sv-t" data-ar="مواقع الأعمال" data-en="Business Websites">مواقع الأعمال</div>
+        <div class="sv-d" data-ar="حضور رقمي قوي لشركتك يعزز مصداقيتك ويوسع نطاق عملك ليصل لعملاء أكثر." data-en="A strong digital presence for your company that enhances credibility and expands your reach to more clients.">حضور رقمي قوي لشركتك يعزز مصداقيتك ويوسع نطاق عملك ليصل لعملاء أكثر.</div>
+      </div>
+      <div class="sv rv d2">
+        <div class="sv-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div class="sv-t" data-ar="تطوير متجاوب" data-en="Responsive Development">تطوير متجاوب</div>
+        <div class="sv-d" data-ar="مواقع تعمل بكمال على جميع الأجهزة: هواتف، أجهزة لوحية، وشاشات مكتبية بأي حجم." data-en="Websites that work perfectly on all devices: phones, tablets, and desktop screens of any size.">مواقع تعمل بكمال على جميع الأجهزة: هواتف، أجهزة لوحية، وشاشات مكتبية بأي حجم.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section id="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="st rv d1">
+        <div class="st-v" data-count="5" data-suf="+">0</div>
+        <div class="st-l" data-ar="مشاريع مكتملة" data-en="Projects Completed">مشاريع مكتملة</div>
+      </div>
+      <div class="st rv d2">
+        <div class="st-v" data-count="5" data-suf="+">0</div>
+        <div class="st-l" data-ar="عملاء سعداء" data-en="Happy Clients">عملاء سعداء</div>
+      </div>
+      <div class="st rv d3">
+        <div class="st-v" data-count="6" data-suf="">0</div>
+        <div class="st-l" data-ar="أشهر من الخبرة" data-en="Months of Experience">أشهر من الخبرة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section id="testimonials" class="pad">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:56px" class="rv">
+      <div class="lbl" style="justify-content:center" data-ar="آراء العملاء" data-en="Client Reviews">آراء العملاء</div>
+      <h2 class="ttl" data-ar="ماذا يقول <span class='gg'>عملاؤنا</span>" data-en="What <span class='gg'>Clients Say</span>">ماذا يقول <span class="gg">عملاؤنا</span></h2>
+    </div>
+    <div class="tsl-wrap rv">
+      <div class="tsl-track" id="tt">
+        <div class="tsl-slide">
+          <div class="tc">
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-q" data-ar='"سيف من أفضل المطورين الذين تعاملت معهم. يفهم ما تريده تماماً ويقدمه بتصميم يفوق كل التوقعات. النتيجة كانت موقعاً مذهلاً أحدث فرقاً حقيقياً في أعمالنا."' data-en='"Saifeldeen is one of the best developers I have worked with. He understands exactly what you want and delivers it with a design that exceeds all expectations. The result was a stunning website that made a real difference in our business."'>"سيف من أفضل المطورين الذين تعاملت معهم. يفهم ما تريده تماماً ويقدمه بتصميم يفوق كل التوقعات."</p>
+            <div class="tc-name" data-ar="أحمد الشريف" data-en="Ahmed Al-Sharif">أحمد الشريف</div>
+            <div class="tc-role" data-ar="صاحب مطعم" data-en="Restaurant Owner">صاحب مطعم</div>
+          </div>
+        </div>
+        <div class="tsl-slide">
+          <div class="tc">
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-q" data-ar='"تجربة تعامل ممتازة من البداية للنهاية. الموقع تسلمته في الوقت المحدد وبجودة عالية جداً. أنصح بشدة بالتعامل مع Eltengy Studios لأي مشروع ويب."' data-en='"An excellent experience from start to finish. I received the website on time and with very high quality. I strongly recommend working with Eltengy Studios for any web project."'>"تجربة تعامل ممتازة من البداية للنهاية. الموقع تسلمته في الوقت المحدد وبجودة عالية جداً."</p>
+            <div class="tc-name" data-ar="مريم حسن" data-en="Mariam Hassan">مريم حسن</div>
+            <div class="tc-role" data-ar="مصممة أزياء" data-en="Fashion Designer">مصممة أزياء</div>
+          </div>
+        </div>
+        <div class="tsl-slide">
+          <div class="tc">
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-q" data-ar='"موهبة حقيقية وشغف واضح في كل تفصيلة. بني لي موقعاً لمتجري الإلكتروني تجاوز ما تخيلته. سأتعامل معه في كل مشاريعي القادمة بلا تردد."' data-en='"A true talent and clear passion in every detail. He built my e-commerce website that surpassed what I had imagined. I will work with him on all my future projects without hesitation."'>"موهبة حقيقية وشغف واضح في كل تفصيلة. بني لي موقعاً يتجاوز ما تخيلته."</p>
+            <div class="tc-name" data-ar="خالد العتيبي" data-en="Khalid Al-Otaibi">خالد العتيبي</div>
+            <div class="tc-role" data-ar="رائد أعمال" data-en="Entrepreneur">رائد أعمال</div>
+          </div>
+        </div>
+      </div>
+      <div class="tsl-dots" id="td">
+        <button class="tsl-dot on" onclick="goSlide(0)"></button>
+        <button class="tsl-dot" onclick="goSlide(1)"></button>
+        <button class="tsl-dot" onclick="goSlide(2)"></button>
+      </div>
+      <div class="tsl-arr">
+        <button class="tsl-a" onclick="prevS()">&#8592;</button>
+        <button class="tsl-a" onclick="nextS()">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="pad">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:56px" class="rv">
+      <div class="lbl" style="justify-content:center" data-ar="تواصل معي" data-en="Get In Touch">تواصل معي</div>
+      <h2 class="ttl" data-ar="لنبدأ <span class='gg'>مشروعك</span> معاً" data-en="Let's Build <span class='gg'>Together</span>">لنبدأ <span class="gg">مشروعك</span> معاً</h2>
+      <p class="sub" style="margin:0 auto" data-ar="هل لديك فكرة؟ تواصل معي وسأحوّلها إلى موقع مذهل" data-en="Have an idea? Contact me and I will turn it into a stunning website">هل لديك فكرة؟ تواصل معي وسأحوّلها إلى موقع مذهل</p>
+    </div>
+    <div class="ct-grid">
+      <div class="rv">
+        <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:10px" data-ar="معلومات التواصل" data-en="Contact Information">معلومات التواصل</h3>
+        <p style="color:var(--white-dim);font-size:.9rem;margin-bottom:28px;line-height:1.8" data-ar="أنا هنا دائماً للمساعدة. لا تتردد في التواصل عبر أي طريقة تناسبك." data-en="I am always here to help. Feel free to reach out through any method that suits you.">أنا هنا دائماً للمساعدة. لا تتردد في التواصل عبر أي طريقة تناسبك.</p>
+        <div class="ct-methods">
+          <a class="cm" href="https://wa.me/201500259969" target="_blank" rel="noopener">
+            <div class="cm-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+            <div><div class="cm-lbl">WhatsApp</div><div class="cm-val">+20 1500259969</div></div>
+          </a>
+          <a class="cm" href="tel:+201500259969">
+            <div class="cm-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.21 2.2 2 2 0 012.2 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-.55a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><div class="cm-lbl" data-ar="اتصل بي" data-en="Call Me">اتصل بي</div><div class="cm-val">+20 1500259969</div></div>
+          </a>
+          <a class="cm" href="https://facebook.com/EltengyStudios" target="_blank" rel="noopener">
+            <div class="cm-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+            <div><div class="cm-lbl">Facebook</div><div class="cm-val">Eltengy Studios</div></div>
+          </a>
+          <a class="cm" href="mailto:eltengy.studios@gmail.com">
+            <div class="cm-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="cm-lbl">Email</div><div class="cm-val">eltengy.studios@gmail.com</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="cf rv d2">
+        <div class="fg">
+          <label class="fl" data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
+          <input class="fi" type="text" id="fn" data-ph-ar="أدخل اسمك الكامل" data-ph-en="Enter your full name" placeholder="أدخل اسمك الكامل">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ar="البريد الإلكتروني" data-en="Email Address">البريد الإلكتروني</label>
+          <input class="fi" type="email" id="fe" data-ph-ar="example@email.com" data-ph-en="example@email.com" placeholder="example@email.com">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ar="الرسالة" data-en="Message">الرسالة</label>
+          <textarea class="fi" rows="5" id="fm" data-ph-ar="اكتب رسالتك هنا..." data-ph-en="Write your message here..." placeholder="اكتب رسالتك هنا..."></textarea>
+        </div>
+        <button class="fsub" onclick="send()"><span data-ar="إرسال عبر واتساب" data-en="Send via WhatsApp">إرسال عبر واتساب</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">Eltengy Studios</div>
+        <p class="ft-desc" data-ar="نحوّل الأفكار إلى مواقع ويب احترافية تُلهم الناس وتحقق الأهداف. كل موقع هو قصة نجاح." data-en="Transforming ideas into professional websites that inspire people and achieve goals. Every website is a success story.">نحوّل الأفكار إلى مواقع ويب احترافية تُلهم الناس وتحقق الأهداف. كل موقع هو قصة نجاح.</p>
+        <div class="ft-socials">
+          <a class="fs" href="https://wa.me/201500259969" target="_blank" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+          <a class="fs" href="https://facebook.com/EltengyStudios" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a class="fs" href="mailto:eltengy.studios@gmail.com" title="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          <a class="fs" href="tel:+201500259969" title="Phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.21 2.2 2 2 0 012.2 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-.55a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h5>
+        <ul class="ft-links">
+          <li><a onclick="goto('#about')" data-ar="عني" data-en="About">عني</a></li>
+          <li><a onclick="goto('#skills')" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+          <li><a onclick="goto('#projects')" data-ar="المشاريع" data-en="Projects">المشاريع</a></li>
+          <li><a onclick="goto('#services')" data-ar="الخدمات" data-en="Services">الخدمات</a></li>
+          <li><a onclick="goto('#contact')" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-ar="الخدمات" data-en="Services">الخدمات</h5>
+        <ul class="ft-links">
+          <li><a data-ar="تصميم المواقع" data-en="Website Design">تصميم المواقع</a></li>
+          <li><a data-ar="الصفحات التسويقية" data-en="Landing Pages">الصفحات التسويقية</a></li>
+          <li><a data-ar="مواقع البورتفوليو" data-en="Portfolio Sites">مواقع البورتفوليو</a></li>
+          <li><a data-ar="مواقع الأعمال" data-en="Business Sites">مواقع الأعمال</a></li>
+          <li><a data-ar="تطوير متجاوب" data-en="Responsive Dev">تطوير متجاوب</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2026 <span>Eltengy Studios</span>. <span data-ar="جميع الحقوق محفوظة." data-en="All Rights Reserved.">جميع الحقوق محفوظة.</span></p>
+      <p data-ar="صُنع بشغف بواسطة سيف الدين التنجي" data-en="Made with passion by Saifeldeen Eltengy">صُنع بشغف بواسطة سيف الدين التنجي</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ---- PROJECTS DATA ---- */
+const PROJECTS = [
+  {
+    img:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80&auto=format&fit=crop',
+    catAr:'مطاعم وضيافة', catEn:'Restaurant & Hospitality',
+    titleAr:'موقع مطعم راقٍ', titleEn:'Restaurant Website',
+    descAr:'موقع أنيق لمطعم فاخر يعرض القائمة والحجوزات بتصميم جذاب يعكس الفخامة.',
+    descEn:'An elegant website for a luxury restaurant showcasing the menu and reservations with an attractive design.',
+    tech:['HTML','CSS','JavaScript']
+  },
+  {
+    img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80&auto=format&fit=crop',
+    catAr:'تجارة إلكترونية', catEn:'E-Commerce',
+    titleAr:'متجر سماعات', titleEn:'Headphones Store',
+    descAr:'متجر إلكتروني متكامل لبيع السماعات بتصميم حديث وتجربة تسوق سلسة.',
+    descEn:'A full e-commerce store for headphones with a modern design and seamless shopping experience.',
+    tech:['HTML','CSS','JavaScript']
+  },
+  {
+    img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80&auto=format&fit=crop',
+    catAr:'تجارة إلكترونية', catEn:'E-Commerce',
+    titleAr:'موقع تجارة إلكترونية', titleEn:'E-Commerce Website',
+    descAr:'موقع متكامل للتسوق الإلكتروني مع نظام عرض منتجات احترافي وتصميم متجاوب.',
+    descEn:'A full shopping website with a professional product display system and responsive design.',
+    tech:['HTML','CSS','JS']
+  },
+  {
+    img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&auto=format&fit=crop',
+    catAr:'صفحة هبوط', catEn:'Landing Page',
+    titleAr:'صفحة هبوط تجارية', titleEn:'Business Landing Page',
+    descAr:'صفحة هبوط احترافية لشركة تقنية بتصميم يُقنع الزوار بالتواصل والتحويل.',
+    descEn:'A professional landing page for a tech company with a design that convinces visitors to convert.',
+    tech:['HTML','CSS','JavaScript']
+  },
+  {
+    img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80&auto=format&fit=crop',
+    catAr:'بورتفوليو', catEn:'Portfolio',
+    titleAr:'بورتفوليو شخصي', titleEn:'Personal Portfolio',
+    descAr:'بورتفوليو شخصي احترافي يعرض المهارات والمشاريع بتصميم فريد لاستقطاب أفضل الفرص.',
+    descEn:'A professional personal portfolio showcasing skills and projects with a unique design to attract the best opportunities.',
+    tech:['HTML','CSS','JS']
+  }
+];
+
+let lang = 'ar';
+
+/* ---- BUILD PROJECTS ---- */
+function buildProjects(){
+  const g = document.getElementById('pg');
+  g.innerHTML = PROJECTS.map((p,i)=>`
+    <div class="pc rv d${(i%3)+1}">
+      <div class="pc-img">
+        <img src="${p.img}" alt="${lang==='ar'?p.titleAr:p.titleEn}" loading="lazy">
+        <div class="pc-ov">
+          <button class="pc-btn pg" data-ar="عرض مباشر" data-en="Live Demo">عرض مباشر</button>
+          <button class="pc-btn pb" data-ar="GitHub" data-en="GitHub">GitHub</button>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-cat">${lang==='ar'?p.catAr:p.catEn}</div>
+        <div class="pc-title">${lang==='ar'?p.titleAr:p.titleEn}</div>
+        <div class="pc-desc">${lang==='ar'?p.descAr:p.descEn}</div>
+        <div class="pc-tags">${p.tech.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+  observeRv();
+}
+
+/* ---- LANGUAGE ---- */
+function setLang(l){
+  lang = l;
+  document.body.className = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir = l==='ar'?'rtl':'ltr';
+  document.getElementById('bAR').classList.toggle('on',l==='ar');
+  document.getElementById('bEN').classList.toggle('on',l==='en');
+  // update all text
+  document.querySelectorAll('[data-ar],[data-en]').forEach(el=>{
+    const v = el.getAttribute('data-'+l);
+    if(v) el.innerHTML = v;
+  });
+  // placeholders
+  document.querySelectorAll('[data-ph-ar]').forEach(el=>{
+    el.placeholder = el.getAttribute('data-ph-'+l)||'';
+  });
+  buildProjects();
+  // update typing
+  wi=0; clearTimeout(tt2); type();
+}
+
+/* ---- TYPING ---- */
+const wAR=['مطور واجهات أمامية','مصمم ويب','مؤسس Eltengy Studios','شغوف بالتطوير'];
+const wEN=['Frontend Developer','Web Designer','Founder of Eltengy Studios','Passionate Builder'];
+let wi=0,ci=0,del=false,tt2;
+function type(){
+  const ws=lang==='ar'?wAR:wEN;
+  const el=document.getElementById('typed');
+  if(!el)return;
+  const w=ws[wi%ws.length];
+  if(!del){ci++;el.textContent=w.slice(0,ci);if(ci===w.length){del=true;tt2=setTimeout(type,1800)}else tt2=setTimeout(type,lang==='ar'?70:80)}
+  else{ci--;el.textContent=w.slice(0,ci);if(ci===0){del=false;wi++;tt2=setTimeout(type,400)}else tt2=setTimeout(type,40)}
+}
+
+/* ---- PARTICLES ---- */
+function initParticles(){
+  const c=document.getElementById('pc');
+  const ctx=c.getContext('2d');
+  let W=window.innerWidth,H=window.innerHeight;
+  c.width=W;c.height=H;
+  window.addEventListener('resize',()=>{W=window.innerWidth;H=window.innerHeight;c.width=W;c.height=H});
+  const n=Math.min(50,Math.floor(W/22));
+  const pts=Array.from({length:n},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,
+    r:Math.random()*1.2+.3,
+    col:Math.random()>.5?'rgba(201,168,76,':'rgba(37,99,255,',
+    a:Math.random()*.3+.05
+  }));
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.col+p.a+')';ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(201,168,76,${.05*(1-d/110)})`;ctx.lineWidth=.5;ctx.stroke()}
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ---- CURSOR ---- */
+function initCursor(){
+  const dot=document.getElementById('cx'),ring=document.getElementById('cr');
+  document.addEventListener('mousemove',e=>{
+    dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';
+    ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';
+  });
+  document.querySelectorAll('a,button,.pc,.sv,.sk,.ah,.cm').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+}
+
+/* ---- NAVBAR ---- */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('sc',scrollY>50);
+});
+
+/* ---- SCROLL REVEAL ---- */
+function observeRv(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>{obs.observe(el)});
+}
+
+/* ---- SKILL BARS ---- */
+function initBars(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const f=e.target.querySelector('.sk-fill');
+        if(f){setTimeout(()=>{f.style.width=f.dataset.w+'%'},200)}
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.4});
+  document.querySelectorAll('.sk').forEach(el=>obs.observe(el));
+}
+
+/* ---- COUNTERS ---- */
+function initCounters(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target,target=+el.dataset.count,suf=el.dataset.suf||'';
+        const dur=1500,step=dur/target;
+        let cur=0;
+        const tmr=setInterval(()=>{
+          cur=Math.min(cur+1,target);
+          el.textContent=cur+suf;
+          if(cur>=target)clearInterval(tmr);
+        },step);
+        obs.unobserve(el);
+      }
+    });
+  },{threshold:.5});
+  document.querySelectorAll('[data-count]').forEach(el=>obs.observe(el));
+}
+
+/* ---- SLIDER ---- */
+let si=0,st;
+function goSlide(i){
+  si=i;
+  const dir=document.documentElement.dir;
+  const off=dir==='rtl'?si*100:-si*100;
+  document.getElementById('tt').style.transform=`translateX(${off}%)`;
+  document.querySelectorAll('.tsl-dot').forEach((d,x)=>d.classList.toggle('on',x===i));
+  clearInterval(st);st=setInterval(nextS,5000);
+}
+function nextS(){goSlide((si+1)%3)}
+function prevS(){goSlide((si+2)%3)}
+
+/* ---- 3D TILT ---- */
+document.addEventListener('mousemove',e=>{
+  document.querySelectorAll('.pc,.sv').forEach(c=>{
+    const r=c.getBoundingClientRect();
+    if(e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom){
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform=`perspective(900px) rotateY(${x*10}deg) rotateX(${-y*8}deg) translateY(-8px) scale(1.01)`;
+    } else {c.style.transform=''}
+  });
+});
+
+/* ---- NAV / MOBILE ---- */
+function goto(id){document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'})}
+function togMob(){document.getElementById('mob').classList.toggle('on');document.getElementById('ham').classList.toggle('on')}
+function closeMob(){document.getElementById('mob').classList.remove('on');document.getElementById('ham').classList.remove('on')}
+
+/* ---- FORM ---- */
+function send(){
+  const n=document.getElementById('fn').value.trim();
+  const e=document.getElementById('fe').value.trim();
+  const m=document.getElementById('fm').value.trim();
+  if(!n||!e||!m){alert(lang==='ar'?'يرجى ملء جميع الحقول':'Please fill all fields');return}
+  const txt=encodeURIComponent(`Hello Saifeldeen,\nName: ${n}\nEmail: ${e}\nMessage: ${m}`);
+  window.open('https://wa.me/201500259969?text='+txt,'_blank');
+}
+
+/* ---- INIT ---- */
+document.addEventListener('DOMContentLoaded',()=>{
+  buildProjects();
+  initParticles();
+  initCursor();
+  observeRv();
+  initBars();
+  initCounters();
+  st=setInterval(nextS,5000);
+  setTimeout(()=>{document.getElementById('loader').classList.add('out');type()},2500);
+});
+</script>
+</body>
+</html>
